@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Container } from "./container";
 import Image from "next/image";
 import Ui from "../ui/index";
-import { User, Users } from "lucide-react";
+import { ArrowRight, ShoppingCart, Users } from "lucide-react";
 
 interface HeaderProps {
   className?: string;
@@ -22,6 +22,20 @@ export const Header = ({ className }: HeaderProps) => {
             <Users size={16} />
             Log In
           </Ui.Button>
+          <div>
+            <Ui.Button className="group relative">
+              <b>22 &euro;</b>
+              <span className="h-full w-[1px] bg-white/30"></span>
+              <div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
+                <ShoppingCart size={16} strokeWidth={2} />
+                <b>3</b>
+              </div>
+              <ArrowRight
+                size={20}
+                className="absolute right-5 opacity-0 transform -translate-x-2 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+              />
+            </Ui.Button>
+          </div>
         </div>
       </Container>
     </header>
