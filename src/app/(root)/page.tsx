@@ -1,10 +1,11 @@
-import { Container, Title } from "@/components/shared/index";
+import { Categories, Container, Title } from "@/components/shared/index";
 
 export default function Home() {
   return (
     <>
-      <Container>
-        <Title size="lg" text="All pizzas" />
+      <Container className="pt-10">
+        <Title size="lg" text="All pizzas" className="font-extrabold" />
+        <Categories />
       </Container>
     </>
   );
