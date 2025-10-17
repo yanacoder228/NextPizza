@@ -28,7 +28,7 @@ export const Categories = ({ className }: CategoriesProps) => {
         <button
           key={index}
           className={cn(
-            "h-10 flex items-center px-5 cursor-pointer rounded-2xl font-bold",
+            "py-3 flex items-center px-5 cursor-pointer rounded-2xl font-bold",
             activeCategory === category &&
               "text-primary bg-white shadow-md shadow-gray-200"
           )}
