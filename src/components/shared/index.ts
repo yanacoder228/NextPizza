@@ -4,5 +4,6 @@ import { Title } from "./title";
 import { Categories } from "./categories";
 import { SortPopup } from "./sort-popup";
 import { TopBar } from "./top-bar";
+import { Filters } from "./Filters";
 
-export { Container, Header, Title, Categories, SortPopup, TopBar };
+export { Container, Header, Title, Categories, SortPopup, TopBar, Filters };

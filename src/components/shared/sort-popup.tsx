@@ -14,7 +14,7 @@ export const SortPopup = ({ className }: SortPopupProps) => {
       )}
     >
       <ArrowUpDown className="w-5 h-5" />
-      <b>Sort</b>
+      <b>Sort:</b>
       <b className="text-primary">Popular</b>
     </div>
   );
