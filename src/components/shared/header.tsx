@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Container } from "./container";
 import Image from "next/image";
-import Ui from "../ui/index";
+import { Button } from "../ui/index";
 import { ArrowRight, ShoppingCart, Users } from "lucide-react";
 
 interface HeaderProps {
@@ -18,12 +18,12 @@ export const Header = ({ className }: HeaderProps) => {
         </div>
         {/*Right side */}
         <div className="flex gap-3 items-center">
-          <Ui.Button variant="outline">
+          <Button variant="outline">
             <Users size={16} />
             Log In
-          </Ui.Button>
+          </Button>
           <div>
-            <Ui.Button className="group relative">
+            <Button className="group relative">
               <b>22 &euro;</b>
               <span className="h-full w-[1px] bg-white/30"></span>
               <div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
@@ -34,7 +34,7 @@ export const Header = ({ className }: HeaderProps) => {
                 size={20}
                 className="absolute right-5 opacity-0 transform -translate-x-2 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
               />
-            </Ui.Button>
+            </Button>
           </div>
         </div>
       </Container>

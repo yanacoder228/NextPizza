@@ -7,13 +7,4 @@ import { Popover } from "./popover";
 import { Select } from "./select";
 import { Skeleton } from "./skeleton";
 
-export default {
-  Badge,
-  Button,
-  Checkbox,
-  Dialog,
-  Input,
-  Popover,
-  Select,
-  Skeleton,
-};
+export { Badge, Button, Checkbox, Dialog, Input, Popover, Select, Skeleton };
