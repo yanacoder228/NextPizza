@@ -6,6 +6,7 @@ import { SortPopup } from "./sort-popup";
 import { TopBar } from "./top-bar";
 import { Filters } from "./filters";
 import { FilterCheckbox } from "./filter-checkbox";
+import { FiltersCheckboxGroup } from "./filters-checkbox-group";
 
 export {
   Container,
@@ -16,4 +17,5 @@ export {
   TopBar,
   Filters,
   FilterCheckbox,
+  FiltersCheckboxGroup,
 };
