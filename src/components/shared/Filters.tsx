@@ -1,3 +1,4 @@
+import type { Ingredient } from "@/types/ingredient";
 import { Input } from "../ui/index";
 import { FiltersCheckboxGroup, Title } from "./index";
 import { FilterCheckbox } from "./index";
@@ -5,8 +6,18 @@ import { RangeSlider } from "./range-slider";
 
 interface FiltersProps {
   className?: string;
-
 }
+
+const ingredients: Ingredient[] = [
+  { id: 1, title: "Cheese Sauce" },
+  { id: 2, title: "Mozzarella" },
+  { id: 3, title: "Garlic" },
+  { id: 4, title: "Pickles" },
+  { id: 5, title: "Red Onion" },
+  { id: 6, title: "Tomatoes" },
+  { id: 7, title: "Basil" },
+  { id: 8, title: "Chili Pepper" },
+];
 
 export const Filters = ({ className }: FiltersProps) => {
   return (
@@ -40,7 +51,11 @@ export const Filters = ({ className }: FiltersProps) => {
         <RangeSlider min={0} max={1000} step={5} value={[0, 1000]} />
       </div>
 
-      <FiltersCheckboxGroup title={"Ingredients"} className="py-7" />
+      <FiltersCheckboxGroup
+        title={"Ingredients"}
+        className="py-7"
+        items={ingredients}
+      />
     </div>
   );
 };

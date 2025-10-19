@@ -1,36 +1,154 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍕 Next.js Pizza Application
 
-## Getting Started
+A modern, full-stack pizza delivery application built with **Next.js**, **Zustand**, and **Prisma**. This project serves as a comprehensive learning experience for modern React development, state management, and database integration.
 
-First, run the development server:
+![Project Screenshot](https://res.cloudinary.com/dislqyhio/image/upload/v1760888177/Screenshot_2025-10-19_173108_kh3uxj.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🎯 Project Goals
+
+This project is designed for **learning and practice** with the following cutting-edge technologies:
+
+- **🎨 Next.js 15** - React framework with App Router and modern features
+- **🐻 Zustand** - Lightweight state management solution
+- **🗄️ Prisma** - Modern database toolkit and ORM
+- **⚡ TypeScript** - Type-safe development
+- **🎨 Tailwind CSS** - Utility-first CSS framework
+- **🧩 Radix UI** - Accessible component primitives
+- **🎭 shadcn/ui** - Beautifully designed component library
+
+## 🏗️ Project Architecture
+
+### Directory Structure
+
+```
+src/
+├── app/                          # Next.js App Router
+│   ├── (root)/                   # Route group for main pages
+│   │   ├── layout.tsx           # Root layout component
+│   │   └── page.tsx             # Home page
+│   ├── favicon.ico              # App favicon
+│   └── globals.css              # Global styles
+├── components/                   # Reusable UI components
+│   ├── shared/                  # Shared business components
+│   │   ├── categories.tsx       # Pizza categories component
+│   │   ├── container.tsx        # Layout container
+│   │   ├── filter-checkbox.tsx  # Filter checkbox component
+│   │   ├── filters.tsx          # Product filters component
+│   │   ├── header.tsx           # Application header
+│   │   ├── range-slider.tsx     # Price range slider
+│   │   ├── sort-popup.tsx       # Sorting options
+│   │   ├── title.tsx            # Section titles
+│   │   └── top-bar.tsx          # Top navigation bar
+│   └── ui/                      # shadcn/ui components
+│       ├── badge.tsx            # Badge component
+│       ├── button.tsx           # Button component
+│       ├── checkbox.tsx         # Checkbox component
+│       ├── dialog.tsx           # Modal dialog
+│       ├── input.tsx            # Input field
+│       ├── popover.tsx          # Popover component
+│       ├── select.tsx           # Select dropdown
+│       └── skeleton.tsx         # Loading skeletons
+├── lib/                         # Utility functions and configurations
+│   └── utils.ts                # Common utilities (cn function)
+└── types/                       # TypeScript type definitions
+    └── ingredient.ts            # Ingredient type definitions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Technology Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Technology | Purpose | Version |
+|------------|---------|---------|
+| **Next.js** | React framework with App Router | 15.5.4 |
+| **React** | UI library | 19.1.0 |
+| **TypeScript** | Type safety | ^5 |
+| **Tailwind CSS** | Styling | ^4 |
+| **Radix UI** | Accessible components | Latest |
+| **shadcn/ui** | Component library & design system | Latest |
+| **Zustand** | State management | (To be added) |
+| **Prisma** | Database ORM | (To be added) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Getting Started
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js 18+ 
+- npm, yarn, pnpm, or bun
+- Database (PostgreSQL, MySQL, SQLite)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd next.js-pizza
+   ```
 
-## Deploy on Vercel
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   bun install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   # Configure your database URL and other environment variables
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Set up the database**
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
+
+5. **Run the development server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   bun dev
+   ```
+
+6. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 🎓 Learning Objectives
+
+### Next.js Features
+- **App Router** - Modern file-based routing
+- **Server Components** - Optimal performance with server-side rendering
+- **Client Components** - Interactive UI with client-side features
+- **Middleware** - Request/response handling
+- **API Routes** - Backend functionality
+
+### Zustand State Management
+- **Store creation** - Centralized state management
+- **Actions** - State updates and business logic
+- **Selectors** - Efficient state selection
+- **Persistence** - Local storage integration
+- **DevTools** - Development debugging
+
+### Prisma Database
+- **Schema definition** - Database modeling
+- **Migrations** - Database version control
+- **Querying** - Type-safe database operations
+- **Relations** - Complex data relationships
+- **Seeding** - Development data setup
+
+## 🍕 Features
+
+- **🔍 Advanced Filtering** - Filter pizzas by category, price, and ingredients
+- **💵 Price Range Slider** - Interactive price selection
+- **📱 Responsive Design** - Mobile-first approach
+- **🎨 Modern UI** - Clean, accessible interface
+- **⚡ Performance** - Optimized loading and rendering
+- **🛒 Shopping Cart** - Add to cart and checkout functionality
+- **🔐 User Authentication** - Secure user management
+
+## 🛠️ Development
+
+
