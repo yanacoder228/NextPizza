@@ -8,7 +8,7 @@ export default function Home() {
       </Container>
       <TopBar />
       <Container>
-        <div className="flex gap-14">
+        <div className="flex gap-14 mt-9">
           {/*Filter*/}
           <aside className="min-w-56 max-w-3xs flex-shrink-0">
             <Filters />
