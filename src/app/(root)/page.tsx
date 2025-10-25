@@ -1,6 +1,12 @@
 import { Container, Filters, Title, TopBar } from "@/components/shared/index";
 
 export default function Home() {
+  //   const [filter, setFilter] = useState("");
+
+  //   const handleFilterChange = (value: string) => {
+  //     setFilter(value);
+  //   };
+
   return (
     <>
       <Container className="pt-6">

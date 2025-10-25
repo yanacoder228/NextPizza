@@ -6,6 +6,7 @@ import { RangeSlider } from "./range-slider";
 
 interface FiltersProps {
   className?: string;
+  onFilterChange?: (value: string) => void;
 }
 
 const ingredients: Ingredient[] = [
