@@ -3,7 +3,7 @@
 import type { Ingredient } from "@/types/ingredient";
 import { Input } from "../ui/index";
 import { FilterCheckbox, Title } from "./index";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 interface FiltersCheckboxGroupProps {
   title: string;
@@ -21,7 +21,17 @@ export const FiltersCheckboxGroup = ({
   items,
 }: FiltersCheckboxGroupProps) => {
   const [isShowing, setIsShowing] = useState(false);
-  const list = isShowing ? items : items.slice(0, limit);
+  const [searchValue, setSearchValue] = useState("");
+
+  const list = isShowing
+    ? items.filter((item) =>
+        item.title.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    : items.slice(0, limit);
+
+  const onChangeSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
 
   const onClickShow = () => {
     setIsShowing(!isShowing);
@@ -31,9 +41,16 @@ export const FiltersCheckboxGroup = ({
     <>
       <div className={className}>
         <Title size="xs" className="font-bold mb-4" text={title} />
-        <div className="mb-4">
-          <Input placeholder={searchInputPlaceholder} />
-        </div>
+
+        {isShowing && (
+          <div className="mb-4">
+            <Input
+              placeholder={searchInputPlaceholder}
+              onChange={onChangeSearchInput}
+            />
+          </div>
+        )}
+
         <div className="flex flex-col gap-2">
           {list.map((item) => (
             <FilterCheckbox
