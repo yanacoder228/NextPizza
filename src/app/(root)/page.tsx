@@ -1,4 +1,5 @@
 import { Container, Filters, Title, TopBar } from "@/components/shared/index";
+import { ProductCard } from "@/components/shared/product-card";
 
 export default function Home() {
   //   const [filter, setFilter] = useState("");
@@ -23,7 +24,15 @@ export default function Home() {
           {/*Product list*/}
           <div className="flex-1">
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-              Product List
+              <ProductCard
+                product={{
+                  id: 1,
+                  img: "https://media.dodostatic.net/image/r:584x584/0198bf57bc517218ab93c762f4b0193e.avif",
+                  title: "Pepperoni Pizza",
+                  price: 13,
+                }}
+                className="max-w-sm mx-auto"
+              />
             </div>
           </div>
         </div>
