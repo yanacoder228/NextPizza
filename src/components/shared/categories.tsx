@@ -7,7 +7,7 @@ interface CategoriesProps {
 
 const categories = [
   "Pizzas",
-  "Combo",
+  "Combos",
   "Snacks",
   "Cocktails",
   "Drinks",

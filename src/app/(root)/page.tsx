@@ -27,6 +27,7 @@ export default function Home() {
           <div className="flex-1">
             <div className="flex flex-col gap-10">
               <ProductGroupList groupTitle="Pizzas" products={products} />
+              <ProductGroupList groupTitle="Combos" products={products} />
             </div>
           </div>
         </div>

@@ -4,19 +4,19 @@ export const useIntersection = <T extends HTMLElement>(
   options?: IntersectionObserverInit
 ) => {
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<T | null>(null);
+  const intersectionRef = useRef<T | null>(null);
 
   useEffect(() => {
-    if (!ref.current) return;
+    if (!intersectionRef.current) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => setIsVisible(entry.isIntersecting),
       options
     );
 
-    observer.observe(ref.current);
+    observer.observe(intersectionRef.current);
     return () => observer.disconnect();
-  }, [ref, options]);
+  }, [intersectionRef, options]);
 
-  return { isVisible, ref };
+  return { isVisible, intersectionRef };
 };
