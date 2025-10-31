@@ -32,8 +32,8 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
           quasi accusantium.
         </p>
         <div className="flex justify-between items-center">
-          <b className="text-lg">{product.price} &euro;</b>
-          <Button className="font-bold">
+          <b className="text-lg">{product.variants[1].price}&euro;</b>
+          <Button className="font-bold cursor-pointer">
             <Plus width={5} height={5} />
             Add
           </Button>

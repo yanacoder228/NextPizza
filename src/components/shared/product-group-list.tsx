@@ -18,10 +18,12 @@ export const ProductGroupList = ({
 }: ProductGroupListProps) => {
   return (
     <div className={className}>
-      {groupTitle && <Title size="lg" text={groupTitle} />}
+      {groupTitle && (
+        <Title size="lg" text={groupTitle} className="font-extrabold mb-5" />
+      )}
       <div
         className={cn(
-          "grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3",
+          "grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3",
           className
         )}
       >

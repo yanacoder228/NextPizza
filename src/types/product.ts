@@ -2,5 +2,9 @@ export type Product = {
   id: number;
   title: string;
   img: string;
-  price: number;
+  variants: {
+    size: "small" | "medium" | "large";
+    dough: "thin" | "traditional";
+    price: number;
+  }[];
 };
