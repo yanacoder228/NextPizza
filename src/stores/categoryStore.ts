@@ -5,7 +5,7 @@ interface CategoryState {
   setActiveId: (activeId: number) => void;
 }
 
-export const useCategoryStory = create<CategoryState>((set) => ({
+export const useCategoryStore = create<CategoryState>((set) => ({
   activeId: 1,
   setActiveId: (id) => set({ activeId: id }),
 }));

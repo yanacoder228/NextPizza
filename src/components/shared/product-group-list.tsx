@@ -6,10 +6,12 @@ import { cn } from "@/lib/utils";
 import { ProductCard } from "./product-card";
 import { useIntersection } from "@/hooks/useIntersection";
 import { useEffect } from "react";
+import { useCategoryStore } from "@/stores/categoryStore";
 
 interface ProductGroupListProps {
   products: Product[];
   groupTitle: string;
+  categoryId: number;
   className?: string;
   listClassName?: string;
 }
@@ -18,15 +20,18 @@ export const ProductGroupList = ({
   className,
   products,
   groupTitle,
+  categoryId,
   listClassName,
 }: ProductGroupListProps) => {
+  const setActiveCategoryId = useCategoryStore((store) => store.setActiveId);
+
   const { intersectionRef, isVisible } = useIntersection<HTMLDivElement>({
     threshold: 0.4,
   });
 
   useEffect(() => {
     if (isVisible) {
-      console.log(groupTitle);
+      setActiveCategoryId(categoryId);
     }
   }, [isVisible]);
 
