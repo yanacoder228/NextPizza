@@ -2,7 +2,7 @@
 
 A modern, full-stack pizza delivery application built with **Next.js**, **Zustand**, and **Prisma**. This project serves as a comprehensive learning experience for modern React development, state management, and database integration.
 
-![Project Screenshot](https://res.cloudinary.com/dislqyhio/image/upload/v1760888177/Screenshot_2025-10-19_173108_kh3uxj.png)
+![Project Screenshot](https://res.cloudinary.com/dislqyhio/image/upload/v1761939531/Screenshot_2025-10-31_203815_vbbs0k.png)
 
 ## 🎯 Project Goals
 
@@ -33,8 +33,12 @@ src/
 │   │   ├── categories.tsx       # Pizza categories component
 │   │   ├── container.tsx        # Layout container
 │   │   ├── filter-checkbox.tsx  # Filter checkbox component
+│   │   ├── filters-checkbox-group.tsx # Filter checkbox group
 │   │   ├── filters.tsx          # Product filters component
 │   │   ├── header.tsx           # Application header
+│   │   ├── index.ts             # Shared components barrel export
+│   │   ├── product-card.tsx     # Product card component
+│   │   ├── product-group-list.tsx # Product group list component
 │   │   ├── range-slider.tsx     # Price range slider
 │   │   ├── sort-popup.tsx       # Sorting options
 │   │   ├── title.tsx            # Section titles
@@ -44,14 +48,23 @@ src/
 │       ├── button.tsx           # Button component
 │       ├── checkbox.tsx         # Checkbox component
 │       ├── dialog.tsx           # Modal dialog
+│       ├── index.ts             # UI components barrel export
 │       ├── input.tsx            # Input field
 │       ├── popover.tsx          # Popover component
 │       ├── select.tsx           # Select dropdown
 │       └── skeleton.tsx         # Loading skeletons
+├── hooks/                       # Custom React hooks
+│   └── useIntersection.ts      # Intersection Observer hook
 ├── lib/                         # Utility functions and configurations
 │   └── utils.ts                # Common utilities (cn function)
+├── mochdata/                    # Mock data for development
+│   ├── categories.ts           # Category mock data
+│   └── products.ts             # Product mock data
+├── stores/                      # Zustand state management
+│   └── categoryStore.ts        # Category state store
 └── types/                       # TypeScript type definitions
-    └── ingredient.ts            # Ingredient type definitions
+    ├── ingredient.ts           # Ingredient type definitions
+    └── product.ts              # Product type definitions
 ```
 
 ### Technology Stack
@@ -64,16 +77,11 @@ src/
 | **Tailwind CSS** | Styling | ^4 |
 | **Radix UI** | Accessible components | Latest |
 | **shadcn/ui** | Component library & design system | Latest |
-| **Zustand** | State management | (To be added) |
+| **Zustand** | State management | 5.0.8 |
 | **Prisma** | Database ORM | (To be added) |
 
 ## 🚀 Getting Started
 
-### Prerequisites
-
-- Node.js 18+ 
-- npm, yarn, pnpm, or bun
-- Database (PostgreSQL, MySQL, SQLite)
 
 ### Installation
 
@@ -92,19 +100,7 @@ src/
    bun install
    ```
 
-3. **Set up environment variables**
-   ```bash
-   cp .env.example .env.local
-   # Configure your database URL and other environment variables
-   ```
-
-4. **Set up the database**
-   ```bash
-   npx prisma generate
-   npx prisma db push
-   ```
-
-5. **Run the development server**
+3. **Run the development server**
    ```bash
    npm run dev
    # or
@@ -113,7 +109,7 @@ src/
    bun dev
    ```
 
-6. **Open your browser**
+4. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## 🎓 Learning Objectives
@@ -126,28 +122,31 @@ src/
 - **API Routes** - Backend functionality
 
 ### Zustand State Management
-- **Store creation** - Centralized state management
-- **Actions** - State updates and business logic
-- **Selectors** - Efficient state selection
-- **Persistence** - Local storage integration
-- **DevTools** - Development debugging
+- **Store creation** - Centralized state management (`src/stores/categoryStore.ts`)
+- **Actions** - State updates and business logic (`setActiveId`)
+- **Selectors** - Efficient state selection (used in `Categories` component)
+- **TypeScript integration** - Fully typed stores with interfaces
+- **DevTools** - Development debugging support
 
-### Prisma Database
-- **Schema definition** - Database modeling
-- **Migrations** - Database version control
-- **Querying** - Type-safe database operations
-- **Relations** - Complex data relationships
-- **Seeding** - Development data setup
+### Custom Hooks
+- **useIntersection** - React hook for Intersection Observer API
+  - Detects element visibility in viewport
+  - Configurable observer options
+  - Returns visibility state and ref
+  - TypeScript generics for type-safe implementation
+  - Reusable pattern for common viewport detection needs
 
 ## 🍕 Features
 
 - **🔍 Advanced Filtering** - Filter pizzas by category, price, and ingredients
-- **💵 Price Range Slider** - Interactive price selection
+- **💵 Price Range Slider** - Interactive price selection with Radix UI
 - **📱 Responsive Design** - Mobile-first approach
-- **🎨 Modern UI** - Clean, accessible interface
-- **⚡ Performance** - Optimized loading and rendering
-- **🛒 Shopping Cart** - Add to cart and checkout functionality
-- **🔐 User Authentication** - Secure user management
+- **🎨 Modern UI** - Clean, accessible interface with shadcn/ui components
+- **⚡ Performance** - Optimized loading and rendering with Next.js 15
+- **🗂️ Category Management** - Dynamic category selection with Zustand state management
+- **🎯 Intersection Observer** - Custom hook for viewport detection
+- **📦 Component Organization** - Barrel exports for clean imports
+- **🎭 TypeScript** - Full type safety across the application
 
 ## 🛠️ Development
 
