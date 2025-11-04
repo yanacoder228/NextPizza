@@ -14,10 +14,11 @@ model User {
    email    String @unique()
    password String
 
+   Cart   Cart? @relation("user_cart")
+   cartId Int
+
    createdAt DateTime @default(now()) @map("created_at")
    updatedAt DateTime @updatedAt @map("updated_at")
-   Cart      Cart?    @relation("user_cart")
-   cartId    Int
 
    @@map("users")
 }
@@ -76,10 +77,10 @@ model Ingredient {
 
    products Product[] @relation("product_ingredients")
 
-   createdAt  DateTime  @default(now()) @map("created_at")
-   updatedAt  DateTime  @updatedAt @map("updated_at")
-   CartItem   CartItem? @relation(fields: [cartItemId], references: [id])
-   cartItemId Int?
+   createdAt DateTime @default(now()) @map("created_at")
+   updatedAt DateTime @updatedAt @map("updated_at")
+
+   CartItem CartItem[]
 
    @@map("ingredients")
 }
@@ -118,4 +119,10 @@ model CartItem {
    updatedAt DateTime @updatedAt @map("updated_at")
 
    @@map("cart_item")
+}
+
+enum OrderStatus {
+   PENDING
+   CANCELLED
+   SUCCEEDED
 }
