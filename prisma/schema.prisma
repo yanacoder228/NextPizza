@@ -13,8 +13,10 @@ model User {
    email    String @unique()
    password String
 
-   cart   Cart @relation(fields: [cartId], references: [id])
-   cartId Int
+   role UserRole @default(USER)
+
+   cart   Cart? @relation("user_cart")
+   cartId Int?
 
    orders Order[]
 
@@ -87,7 +89,8 @@ model Ingredient {
 
 model Cart {
    id          Int     @id @default(autoincrement())
-   user        User    @relation(fields: [userId], references: [id])
+   user        User    @relation("user_cart", fields: [userId], references: [id])
+   userId      Int     @unique
    totalAmount Int     @default(0)
    token       String?
 
@@ -95,7 +98,6 @@ model Cart {
 
    createdAt DateTime @default(now()) @map("created_at")
    updatedAt DateTime @updatedAt @map("updated_at")
-   userId    Int
 
    @@map("carts")
 }
@@ -151,4 +153,9 @@ enum OrderStatus {
    PENDING
    CANCELLED
    SUCCEEDED
+}
+
+enum UserRole {
+   ADMIN
+   USER
 }
