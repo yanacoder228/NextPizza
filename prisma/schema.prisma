@@ -8,14 +8,15 @@ datasource db {
 }
 
 model User {
-   id Int @id @default(autoincrement())
-
+   id       Int    @id @default(autoincrement())
    fullName String @map("full_name")
    email    String @unique()
    password String
 
-   Cart   Cart? @relation("user_cart")
+   cart   Cart @relation(fields: [cartId], references: [id])
    cartId Int
+
+   orders Order[]
 
    createdAt DateTime @default(now()) @map("created_at")
    updatedAt DateTime @updatedAt @map("updated_at")
@@ -23,16 +24,26 @@ model User {
    @@map("users")
 }
 
-model Product {
-   id Int @id @default(autoincrement())
+model Category {
+   id       Int       @id @default(autoincrement())
+   title    String    @unique()
+   products Product[] @relation("product_category")
 
+   createdAt DateTime @default(now()) @map("created_at")
+   updatedAt DateTime @updatedAt @map("updated_at")
+
+   @@map("categories")
+}
+
+model Product {
+   id         Int       @id @default(autoincrement())
    title      String
    imgUrl     String    @map("img_url")
    category   Category? @relation("product_category", fields: [categoryId], references: [id])
    categoryId Int?
 
-   ingredient       Ingredient[]       @relation("product_ingredients")
-   productVariation ProductVariation[] @relation("product_variations")
+   ingredients Ingredient[]       @relation("product_ingredients")
+   variations  ProductVariation[] @relation("product_variations")
 
    createdAt DateTime @default(now()) @map("created_at")
    updatedAt DateTime @updatedAt @map("updated_at")
@@ -49,76 +60,91 @@ model ProductVariation {
    product   Product @relation("product_variations", fields: [productId], references: [id])
    productId Int
 
-   createdAt DateTime   @default(now()) @map("created_at")
-   updatedAt DateTime   @updatedAt @map("updated_at")
-   CartItem  CartItem[] @relation("product_item")
+   cartItems  CartItem[]
+   orderItems OrderItem[]
+
+   createdAt DateTime @default(now()) @map("created_at")
+   updatedAt DateTime @updatedAt @map("updated_at")
 
    @@map("product_variations")
 }
 
-model Category {
-   id Int @id @default(autoincrement())
-
-   title    String    @unique()
-   products Product[] @relation("product_category")
-
-   createdAt DateTime @default(now()) @map("created_at")
-   updatedAt DateTime @updatedAt @map("updated_at")
-
-   @@map("categories")
-}
-
 model Ingredient {
-   id Int @id @default(autoincrement())
-
+   id     Int    @id @default(autoincrement())
    title  String @unique()
    price  Int
    imgUrl String
 
-   products Product[] @relation("product_ingredients")
+   products   Product[]   @relation("product_ingredients")
+   cartItems  CartItem[]
+   orderItems OrderItem[]
 
    createdAt DateTime @default(now()) @map("created_at")
    updatedAt DateTime @updatedAt @map("updated_at")
-
-   CartItem CartItem[]
 
    @@map("ingredients")
 }
 
 model Cart {
-   id Int @id @default(autoincrement())
-
-   userCart User? @relation("user_cart", fields: [userId], references: [id])
-   userId   Int?  @unique
-
+   id          Int     @id @default(autoincrement())
+   user        User    @relation(fields: [userId], references: [id])
    totalAmount Int     @default(0)
    token       String?
 
-   CartItem CartItem[] @relation("user_cart")
+   items CartItem[]
 
    createdAt DateTime @default(now()) @map("created_at")
    updatedAt DateTime @updatedAt @map("updated_at")
+   userId    Int
 
    @@map("carts")
 }
 
 model CartItem {
-   id Int @id @default(autoincrement())
+   id     Int  @id @default(autoincrement())
+   cart   Cart @relation(fields: [cartId], references: [id])
+   cartId Int
 
-   userCart Cart @relation("user_cart", fields: [cartId], references: [id])
-   cartId   Int
-
-   productItem        ProductVariation @relation("product_item", fields: [productVariationId], references: [id])
-   productVariationId Int              @map("product_variation_id")
+   productVariation   ProductVariation @relation(fields: [productVariationId], references: [id])
+   productVariationId Int
 
    ingredients Ingredient[]
-
-   quantity Int @default(1)
+   quantity    Int          @default(1)
 
    createdAt DateTime @default(now()) @map("created_at")
-   updatedAt DateTime @updatedAt @map("updated_at")
+   updatedAt DateTime @updatedAt
+}
 
-   @@map("cart_item")
+model Order {
+   id     Int   @id @default(autoincrement())
+   user   User? @relation(fields: [userId], references: [id])
+   userId Int?
+
+   token       String
+   totalAmount Int         @default(0) @map("total_amount")
+   status      OrderStatus
+   paymentId   String?
+
+   items OrderItem[]
+
+   createdAt DateTime @default(now()) @map("created_at")
+   updatedAt DateTime @updatedAt
+}
+
+model OrderItem {
+   id      Int   @id @default(autoincrement())
+   order   Order @relation(fields: [orderId], references: [id])
+   orderId Int
+
+   productVariation   ProductVariation @relation(fields: [productVariationId], references: [id])
+   productVariationId Int
+
+   ingredients Ingredient[]
+   quantity    Int          @default(1)
+   priceAtBuy  Int
+
+   createdAt DateTime @default(now()) @map("created_at")
+   updatedAt DateTime @updatedAt
 }
 
 enum OrderStatus {
