@@ -6,7 +6,7 @@ A modern, full-stack pizza delivery application built with **Next.js**, **Zustan
 
 ## 🎯 Project Goals
 
-This project is designed for **learning and practice** with the following cutting-edge technologies:
+This project is a **full-stack pizza delivery application** designed for learning and practicing modern web development. The application demonstrates e-commerce concepts including product catalog management, shopping cart functionality, user authentication, and order processing.
 
 - **🎨 Next.js 15** - React framework with App Router and modern features
 - **🐻 Zustand** - Lightweight state management solution
@@ -15,6 +15,7 @@ This project is designed for **learning and practice** with the following cuttin
 - **🎨 Tailwind CSS** - Utility-first CSS framework
 - **🧩 Radix UI** - Accessible component primitives
 - **🎭 shadcn/ui** - Beautifully designed component library
+- **🔒 Argon2** - Secure password hashing
 
 ## 🏗️ Project Architecture
 
@@ -74,11 +75,14 @@ src/
 | **Next.js** | React framework with App Router | 15.5.4 |
 | **React** | UI library | 19.1.0 |
 | **TypeScript** | Type safety | ^5 |
-| **Tailwind CSS** | Styling | ^4 |
-| **Radix UI** | Accessible components | Latest |
+| **Tailwind CSS** | Utility-first CSS framework | ^4 |
+| **Radix UI** | Accessible component primitives | Latest |
 | **shadcn/ui** | Component library & design system | Latest |
 | **Zustand** | State management | 5.0.8 |
-| **Prisma** | Database ORM | (To be added) |
+| **Prisma** | Database ORM and type-safe database client | ^6.18.0 |
+| **Neon** | Serverless PostgreSQL database | Cloud |
+| **Argon2** | Password hashing | ^0.44.0 |
+| **Lucide React** | Icon library | ^0.545.0 |
 
 ## 🚀 Getting Started
 
@@ -149,5 +153,3 @@ src/
 - **🎭 TypeScript** - Full type safety across the application
 
 ## 🛠️ Development
-
-
