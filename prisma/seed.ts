@@ -5,13 +5,14 @@ async function up() {
   await prisma.user.createMany({
     data: [
       {
-        fullName: "User test",
+        fullName: "User test 2",
         email: "test@gmail.com",
         password: await hash("111111"),
         role: "USER",
       },
+
       {
-        fullName: "Admin",
+        fullName: "Admin 2",
         email: "testadmin@gmail.com",
         password: await hash("111111"),
         role: "ADMIN",
@@ -26,8 +27,8 @@ async function down() {
 
 async function main() {
   try {
-    down();
-    up();
+    await down();
+    await up();
   } catch (err) {
     console.log(err);
   }
