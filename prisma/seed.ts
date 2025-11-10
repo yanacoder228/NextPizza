@@ -1,45 +1,44 @@
 import { prisma } from "../src/lib/prisma";
+import { UserRole } from "@prisma/client";
+import seedData from "./seedData.json";
 import { hash } from "argon2";
 
 async function up() {
-  await prisma.user.createMany({
-    data: [
-      {
-        fullName: "User test 2",
-        email: "test@gmail.com",
-        password: await hash("111111"),
-        role: "USER",
+  for (const user of seedData.users) {
+    await prisma.user.create({
+      data: {
+        fullName: user.fullName,
+        email: user.email,
+        password: await hash(user.password),
+        role: user.role === "USER" ? UserRole.USER : UserRole.ADMIN, // <-- enum
       },
+    });
+  }
 
-      {
-        fullName: "Admin 2",
-        email: "testadmin@gmail.com",
-        password: await hash("111111"),
-        role: "ADMIN",
-      },
-    ],
+  await prisma.category.createMany({
+    data: seedData.categories,
   });
 }
 
 async function down() {
-  await prisma.$executeRaw`TRUNCATE TABLE "users" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRawUnsafe(
+    `TRUNCATE TABLE "users" RESTART IDENTITY CASCADE`
+  );
+  await prisma.$executeRawUnsafe(
+    `TRUNCATE TABLE "categories" RESTART IDENTITY CASCADE`
+  );
 }
 
 async function main() {
   try {
     await down();
     await up();
+    console.log("✅ Seed completed");
   } catch (err) {
-    console.log(err);
+    console.error(err);
+  } finally {
+    await prisma.$disconnect();
   }
 }
 
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (err) => {
-    console.error(err);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+main();

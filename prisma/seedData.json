@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "fullName": "User test 2",
+      "email": "test@gmail.com",
+      "password": "111111",
+      "role": "USER"
+    },
+    {
+      "fullName": "Admin 2",
+      "email": "testadmin@gmail.com",
+      "password": "111111",
+      "role": "ADMIN"
+    }
+  ],
+  "categories": [
+    { "title": "Pizzas" },
+    { "title": "Combos" },
+    { "title": "Snacks" },
+    { "title": "Cocktails" },
+    { "title": "Drinks" },
+    { "title": "Desserts" }
+  ]
+}
