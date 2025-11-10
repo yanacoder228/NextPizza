@@ -23,7 +23,7 @@ model User {
    orders Order[]
 
    createdAt DateTime @default(now()) @map("created_at")
-   updatedAt DateTime @updatedAt @map("updated_at")
+   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
    @@map("users")
 }
@@ -34,7 +34,7 @@ model Category {
    products Product[] @relation("product_category")
 
    createdAt DateTime @default(now()) @map("created_at")
-   updatedAt DateTime @updatedAt @map("updated_at")
+   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
    @@map("categories")
 }
@@ -50,7 +50,7 @@ model Product {
    variations  ProductVariation[] @relation("product_variations")
 
    createdAt DateTime @default(now()) @map("created_at")
-   updatedAt DateTime @updatedAt @map("updated_at")
+   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
    @@map("products")
 }
@@ -68,23 +68,23 @@ model ProductVariation {
    orderItems OrderItem[]
 
    createdAt DateTime @default(now()) @map("created_at")
-   updatedAt DateTime @updatedAt @map("updated_at")
+   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
    @@map("product_variations")
 }
 
 model Ingredient {
-   id     Int    @id @default(autoincrement())
-   title  String @unique()
-   price  Int
-   imgUrl String
+   id     Int     @id @default(autoincrement())
+   title  String  @unique()
+   price  Int?
+   imgUrl String?
 
    products   Product[]   @relation("product_ingredients")
    cartItems  CartItem[]
    orderItems OrderItem[]
 
    createdAt DateTime @default(now()) @map("created_at")
-   updatedAt DateTime @updatedAt @map("updated_at")
+   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
    @@map("ingredients")
 }
@@ -99,7 +99,7 @@ model Cart {
    items CartItem[]
 
    createdAt DateTime @default(now()) @map("created_at")
-   updatedAt DateTime @updatedAt @map("updated_at")
+   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
    @@map("carts")
 }
@@ -116,7 +116,7 @@ model CartItem {
    quantity    Int          @default(1)
 
    createdAt DateTime @default(now()) @map("created_at")
-   updatedAt DateTime @updatedAt
+   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
    @@map("cart_items")
 }
@@ -134,7 +134,7 @@ model Order {
    items OrderItem[]
 
    createdAt DateTime @default(now()) @map("created_at")
-   updatedAt DateTime @updatedAt
+   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
    @@map("orders")
 }
@@ -152,7 +152,7 @@ model OrderItem {
    priceAtBuy  Int
 
    createdAt DateTime @default(now()) @map("created_at")
-   updatedAt DateTime @updatedAt
+   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
    @@map("order_items")
 }

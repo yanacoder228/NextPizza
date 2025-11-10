@@ -1,5 +1,5 @@
 import { prisma } from "../src/lib/prisma";
-import { users, categories, products, ingredients } from "./seedData";
+import { users, categories, ingredients } from "./seedData";
 import { hash } from "argon2";
 
 async function up() {
@@ -21,12 +21,6 @@ async function up() {
     skipDuplicates: true,
   });
 
-  // Seed products
-  await prisma.product.createMany({
-    data: products,
-    skipDuplicates: true,
-  });
-
   // Seed ingredients
   await prisma.ingredient.createMany({
     data: ingredients,
@@ -35,30 +29,22 @@ async function up() {
 }
 
 async function down() {
-  await prisma.$executeRawUnsafe(
-    `TRUNCATE TABLE "order_items" RESTART IDENTITY CASCADE`
-  );
-  await prisma.$executeRawUnsafe(
-    `TRUNCATE TABLE "orders" RESTART IDENTITY CASCADE`
-  );
-  await prisma.$executeRawUnsafe(
-    `TRUNCATE TABLE "cart_items" RESTART IDENTITY CASCADE`
-  );
-  await prisma.$executeRawUnsafe(
-    `TRUNCATE TABLE "carts" RESTART IDENTITY CASCADE`
-  );
-  await prisma.$executeRawUnsafe(
-    `TRUNCATE TABLE "products" RESTART IDENTITY CASCADE`
-  );
-  await prisma.$executeRawUnsafe(
-    `TRUNCATE TABLE "ingredients" RESTART IDENTITY CASCADE`
-  );
-  await prisma.$executeRawUnsafe(
-    `TRUNCATE TABLE "categories" RESTART IDENTITY CASCADE`
-  );
-  await prisma.$executeRawUnsafe(
-    `TRUNCATE TABLE "users" RESTART IDENTITY CASCADE`
-  );
+  const tables = [
+    "order_items",
+    "orders",
+    "cart_items",
+    "carts",
+    "products",
+    "ingredients",
+    "categories",
+    "users",
+  ];
+
+  for (const table of tables) {
+    await prisma.$executeRawUnsafe(
+      `TRUNCATE TABLE "${table}" RESTART IDENTITY CASCADE`
+    );
+  }
 }
 
 async function main() {
