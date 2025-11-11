@@ -7,6 +7,7 @@ import { TopBar } from "./top-bar";
 import { Filters } from "./filters";
 import { FilterCheckbox } from "./filter-checkbox";
 import { FiltersCheckboxGroup } from "./filters-checkbox-group";
+import { SearchBar } from "./search-bar";
 
 export {
   Container,
@@ -18,4 +19,5 @@ export {
   Filters,
   FilterCheckbox,
   FiltersCheckboxGroup,
+  SearchBar,
 };

@@ -2,7 +2,9 @@ import { cn } from "@/lib/utils";
 import { Container } from "./container";
 import Image from "next/image";
 import { Button } from "../ui/index";
+import { SearchBar } from "./index";
 import { ArrowRight, ShoppingCart, Users } from "lucide-react";
+import Link from "next/link";
 
 interface HeaderProps {
   className?: string;
@@ -11,11 +13,21 @@ interface HeaderProps {
 export const Header = ({ className }: HeaderProps) => {
   return (
     <header className={cn("border-b border-border", className)}>
-      <Container className="flex justify-between items-center py-5">
+      <Container className="flex items-center py-5">
         {/*Left side */}
-        <div>
-          <Image src="/logo.png" alt="logo" width={32} height={32} />
-        </div>
+        <Link href={"/"}>
+          <div className="inline-flex gap-1 items-center">
+            <Image src="/logo.png" alt="logo" width={32} height={32} />
+            <span className="font-extrabold text-2xl uppercase">
+              Pizza House
+            </span>
+          </div>
+        </Link>
+
+        {/*Сenter */}
+
+        <SearchBar className="mx-8 flex flex-1" />
+
         {/*Right side */}
         <div className="flex gap-3 items-center">
           <Button variant="outline">
