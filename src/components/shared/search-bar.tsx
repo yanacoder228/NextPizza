@@ -30,11 +30,11 @@ export const SearchBar = ({ className }: SearchBarProps) => {
           placeholder="Find..."
           type="text"
           onFocus={() => setIsFocused(true)}
-          className="pl-10 bg-gray-100 focus-visible:ring-0 focus-visible:border-transparent"
+          className="pl-10 bg-gray-100"
         />
         <div
           className={cn(
-            "absolute bg-white w-full top-15 z-15 py-2 px-3 opacity-0 shadow-md transition-all duration-200",
+            "absolute bg-white w-full rounded-md top-15 z-15 py-2 px-3 opacity-0 shadow-md transition-all duration-200",
             isFocused && "opacity-100 top-12"
           )}
         >
