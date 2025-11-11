@@ -20,6 +20,7 @@ export const SearchBar = ({ className }: SearchBarProps) => {
       {isFocused && (
         <div className="fixed top-0 left-0 right-0  bottom-0 bg-black/30 z-15" />
       )}
+
       <div ref={ref} className={cn(`relative z-15`, className)}>
         <Search
           width={20}
@@ -31,6 +32,14 @@ export const SearchBar = ({ className }: SearchBarProps) => {
           onFocus={() => setIsFocused(true)}
           className="pl-10 bg-gray-100 focus-visible:ring-0 focus-visible:border-transparent"
         />
+        <div
+          className={cn(
+            "absolute bg-white w-full top-15 z-15 py-2 px-3 opacity-0 shadow-md transition-all duration-200",
+            isFocused && "opacity-100 top-12"
+          )}
+        >
+          fejierjip
+        </div>
       </div>
     </>
   );
