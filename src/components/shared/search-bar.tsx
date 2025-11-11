@@ -3,7 +3,8 @@
 import { Search } from "lucide-react";
 import { Input } from "../ui";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useClickOutside } from "@/hooks/useClickOutside";
 
 interface SearchBarProps {
   className?: string;
@@ -11,12 +12,15 @@ interface SearchBarProps {
 
 export const SearchBar = ({ className }: SearchBarProps) => {
   const [isFocused, setIsFocused] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useClickOutside(ref, () => setIsFocused(false));
   return (
     <>
       {isFocused && (
         <div className="fixed top-0 left-0 right-0  bottom-0 bg-black/30 z-15" />
       )}
-      <div className={cn(`relative z-15`, className)}>
+      <div ref={ref} className={cn(`relative z-15`, className)}>
         <Search
           width={20}
           className="absolute top-1/2 left-3 translate-y-[-50%] text-gray-400"
