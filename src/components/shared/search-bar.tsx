@@ -23,10 +23,14 @@ export const SearchBar = ({ className }: SearchBarProps) => {
 
   useClickOutside(ref, () => setIsFocused(false));
 
+  const onClickItem = () => {
+    setIsFocused(false);
+    setSearchQuery("");
+  };
+
   const { debouncedValue } = useDebounce(searchQuery, 300);
 
   useEffect(() => {
-
     if (debouncedValue) {
       Api.products.search(debouncedValue).then((items) => {
         setProducts(items);
@@ -69,6 +73,7 @@ export const SearchBar = ({ className }: SearchBarProps) => {
                 <Link
                   key={product.id}
                   href={`/product/${product.id}`}
+                  onClick={onClickItem}
                   className="flex items-center p-1 rounded-xl gap-3 hover:bg-primary/10"
                 >
                   <Image
