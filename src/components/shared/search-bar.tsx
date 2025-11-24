@@ -3,18 +3,26 @@
 import { Search } from "lucide-react";
 import { Input } from "../ui";
 import { cn } from "@/lib/utils";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { Api } from "@/services/api-client";
 
 interface SearchBarProps {
   className?: string;
 }
 
 export const SearchBar = ({ className }: SearchBarProps) => {
+  const [searchQuery, setSearchQuery] = useState("");
+
   const [isFocused, setIsFocused] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useClickOutside(ref, () => setIsFocused(false));
+
+  useEffect(() => {
+    Api.products.search(searchQuery);
+  }, [searchQuery]);
+
   return (
     <>
       {isFocused && (
@@ -30,6 +38,8 @@ export const SearchBar = ({ className }: SearchBarProps) => {
           placeholder="Find..."
           type="text"
           onFocus={() => setIsFocused(true)}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
           className="pl-10 bg-gray-100"
         />
         <div
