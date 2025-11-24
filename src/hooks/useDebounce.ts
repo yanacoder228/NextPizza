@@ -1,0 +1,38 @@
+// hooks/useDebounce.ts
+import { useEffect, useRef, useState } from "react";
+
+export function useDebounce<T>(
+  value: T,
+  delay: number = 500
+): { debouncedValue: T; debouncedFn: (newValue: T) => void } {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const debouncedFn = (newValue: T) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(() => {
+      setDebouncedValue(newValue);
+    }, delay);
+  };
+
+  useEffect(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [value, delay]);
+
+  return { debouncedValue, debouncedFn };
+}

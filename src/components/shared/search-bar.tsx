@@ -5,7 +5,11 @@ import { Input } from "../ui";
 import { cn } from "@/lib/utils";
 import { useState, useRef, useEffect } from "react";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { useDebounce } from "@/hooks/useDebounce";
 import { Api } from "@/services/api-client";
+import { Product } from "@prisma/client";
+import Link from "next/link";
+import Image from "next/image";
 
 interface SearchBarProps {
   className?: string;
@@ -13,15 +17,24 @@ interface SearchBarProps {
 
 export const SearchBar = ({ className }: SearchBarProps) => {
   const [searchQuery, setSearchQuery] = useState("");
-
+  const [products, setProducts] = useState<Product[]>([]);
   const [isFocused, setIsFocused] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useClickOutside(ref, () => setIsFocused(false));
 
+  const { debouncedValue } = useDebounce(searchQuery, 300);
+
   useEffect(() => {
-    Api.products.search(searchQuery);
-  }, [searchQuery]);
+
+    if (debouncedValue) {
+      Api.products.search(debouncedValue).then((items) => {
+        setProducts(items);
+      });
+    } else {
+      setProducts([]);
+    }
+  }, [debouncedValue]);
 
   return (
     <>
@@ -48,7 +61,27 @@ export const SearchBar = ({ className }: SearchBarProps) => {
             isFocused && "opacity-100 top-12"
           )}
         >
-          fejierjip
+          {products.length === 0 ? (
+            <p className="text-sm text-gray-400">No products found</p>
+          ) : (
+            <div className="flex flex-col gap-2">
+              {products.map((product) => (
+                <Link
+                  key={product.id}
+                  href={`/product/${product.id}`}
+                  className="flex items-center p-1 rounded-xl gap-3 hover:bg-primary/10"
+                >
+                  <Image
+                    src={`${product.imgUrl}`}
+                    alt={product.title}
+                    width={50}
+                    height={50}
+                  />
+                  <span className="font-medium">{product.title}</span>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>
